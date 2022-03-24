@@ -1,6 +1,23 @@
 /* Global Variables */
-const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`,
-  apiKey = `,&appid=..........`;
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
+let apiKey = `,&appid=78e5b891e6da809c0b2db304f0ca8cd1`;
+
+// ,apiKey = `,&appid=${process.env.APIKEY}`
+
+/*  get key from the server
+
+never used... i made it for testing perposes only and got the key in the server code too
+const getKey = async () => {
+	const res = await fetch("/apikey");
+	
+	try {
+		const key = await res.json();
+		console.log(key.key);
+	} catch (e) {
+		console.log(e);
+	}
+};
+*/
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -56,6 +73,7 @@ const fetchWeather = async (key, zipCode) => {
 
   try {
     const data = await res.json();
+
     return data;
   } catch (e) {
     console.log(e);
@@ -98,6 +116,10 @@ const dynUpdateUI = async () => {
   }
 };
 
+/*
+	EXECUTE!
+*/
+
 // function which call all the chaining promises!!
 const executer = () => {
   // fetching zip code from the user
@@ -115,8 +137,10 @@ const executer = () => {
         userResponse: feelings,
       }).then(dynUpdateUI());
     } else {
-      // [ ] city found found on cod:404
-      console.log(resolve.message);
+      // [x] city found found on cod:404
+      document.getElementById(
+        "error"
+      ).innerHTML = `Aw, ${resolve.message} 😰`;
     }
   });
 };
