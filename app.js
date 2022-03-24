@@ -17,7 +17,6 @@ const fetchWeather = async (zipCode) => {
 
   try {
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (e) {
     console.log(e);
@@ -45,6 +44,26 @@ const postData = async (url = "", data = {}) => {
   }
 };
 
+// update UI
+const dynUpdateUI = async (data) => {
+  // fetch data from the post route
+  console.log(data.city);
+  console.log(data.temp);
+  console.log(data.date);
+  console.log(data.userResponse);
+
+  //   fetch data from server on /get route!
+  //   const res = await fetch("/get");
+
+  //   try {
+  //     const DATA = await res.json();
+  //     console.log(DATA);
+  //     return DATA;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+};
+
 const executer = () => {
   // fetching zip code from the user
   const zipCode = document.getElementById("zip").value;
@@ -52,11 +71,17 @@ const executer = () => {
     document.getElementById("feelings").value;
 
   fetchWeather(zipCode).then((resolve) => {
-    postData(`/add`, {
-      temperature: `${resolve.main.temp}\u00B0C`,
-      date: newDate,
-      userResponse: feelings,
-    });
+    if (resolve.cod === 200) {
+      postData(`/add`, {
+        city: resolve.name,
+        temp: `${resolve.main.temp}\u00B0C`,
+        date: newDate,
+        userResponse: feelings,
+      }).then((resolve) => dynUpdateUI(resolve));
+    } else {
+      // city found found on cod:404
+      console.log(resolve.message);
+    }
   });
 };
 
