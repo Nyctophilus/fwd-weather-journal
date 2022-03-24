@@ -53,3 +53,16 @@ app.post("/add", (req, res) => {
 app.get("/all", (req, res) =>
   res.status(200).send(projectData)
 );
+
+/*
+	DotEnv
+*/
+
+require("dotenv").config();
+
+// get request to send
+app.get("/apikey", (req, res) => {
+  res.send({
+    key: process.env.APIKEY,
+  });
+});

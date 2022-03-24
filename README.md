@@ -24,6 +24,7 @@ Weather Journal App with Asynchronous JavaScript that uses Web API and user data
   <li>Express.js Environment</li>
   <li>Server-Side Code & Client-Side Code</li>
   <li>fetch data from API, which used to dynamically update the UI.</li>
+  <li>Learnt how to create env variable to securely and conveniently configure things like API authentication keys.</li>
 </menu>
 
 <br>
