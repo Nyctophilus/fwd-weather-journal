@@ -11,26 +11,28 @@
   </head>
   <body>
     <div id="app">
-      <div class="holder headline">Weather Journal App</div>
-      <div class="holder zip">
-        <label for="zip">Enter Zipcode here</label>
-        <input
-          type="text"
-          id="zip"
-          placeholder="enter zip code here"
-        />
+      <div class="holder headline"><h1>Weather Journal App</h1></div>
+      <div class="holder info">
+<div class="zip">
+	<label for="zip">Enter Zipcode here</label>
+	<input
+	  type="text"
+	  id="zip"
+	  placeholder="enter zip code here"
+	/>
+
+</div>
+		<div class="feel"><label for="feelings"
+			>How are you feeling today?</label
+		  >
+		  <textarea
+			class="myInput"
+			id="feelings"
+			placeholder="Enter your feelings here" 
+		  ></textarea></div>
       </div>
-      <div class="holder feel">
-        <label for="feelings"
-          >How are you feeling today?</label
-        >
-        <textarea
-          class="myInput"
-          id="feelings"
-          placeholder="Enter your feelings here"
-          rows="9"
-          cols="50"
-        ></textarea>
+      <div class="gen">
+
         <button id="generate" type="submit">
           Generate
         </button>
@@ -42,7 +44,7 @@
           <div id="date"></div>
           <div id="temp"></div>
           <img  id="statusIcon" alt="Weather Status" hidden></img>
-          <div id="content"></div>
+          <div id="feeling"></div>
         </div>
       </div>
     </div>

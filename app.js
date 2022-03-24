@@ -1,6 +1,6 @@
 /* Global Variables */
-let baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
-const apiKey = `,&appid=...`;
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`,
+  apiKey = `,&appid=..........`;
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -9,13 +9,49 @@ let newDate = `${d.getDate()}-${d.toLocaleString("en-us", {
 })}-${d.getFullYear()}`;
 
 /*
+	helper functions
+*/
+function manipulateUI(data) {
+  // 	entry holders
+  const temp = document.getElementById("temp"),
+    date = document.getElementById("date"),
+    city = document.getElementById("city"),
+    statusIcon = document.getElementById("statusIcon"),
+    feeling = document.getElementById("feeling");
+
+  // chnage source img based on the weather status aquired!
+  switch (data.weatherStatus) {
+    case "Snow":
+      statusIcon.src = `https://www.svgrepo.com/show/252488/snowy-snow.svg`;
+      break;
+    case "Clouds":
+      statusIcon.src = `https://www.svgrepo.com/show/68769/weather.svg`;
+      break;
+
+    default:
+      statusIcon.src = `https://www.svgrepo.com/show/315013/weather.svg`;
+  }
+  // show the icon
+  statusIcon.hidden = false;
+
+  // update the ui with the aquired data
+  city.innerHTML = `City Name: <strong>${data.city}</strong>`;
+  temp.innerHTML = `Temperature: <strong>${data.temp}</strong>`;
+  date.innerHTML = `Date: <strong>${data.date}</strong>`;
+  feeling.innerHTML = `Your Feedback: <strong>${
+    data.userResponse || "Nothing Felt!"
+  }</strong>`;
+}
+
+/*
 	route functions
 */
 
 // fetch from weather API
-const fetchWeather = async (zipCode) => {
+const fetchWeather = async (key, zipCode) => {
+  const units = "metric";
   const res = await fetch(
-    `${baseURL}${zipCode}${apiKey}&units=metric`
+    `${baseURL}${zipCode}${key}&units=${units}`
   );
 
   try {
@@ -50,53 +86,16 @@ const postData = async (url = "", data = {}) => {
 /*
 	Update UI
 */
-const dynUpdateUI = async (data) => {
-  // fetch data from the post route
-  console.log(data.city);
-  console.log(data.temp);
-  console.log(data.date);
-  console.log(data.userResponse);
-  console.log(data.weatherStatus);
+const dynUpdateUI = async () => {
+  // fetch data from server on /get route!
+  const res = await fetch("/all");
 
-  // 	entry holders
-  const temp = document.getElementById("temp"),
-    date = document.getElementById("date"),
-    city = document.getElementById("city"),
-    statusIcon = document.getElementById("statusIcon"),
-    content = document.getElementById("content");
-
-  // chnage source img based on the weather status aquired!
-  switch (data.weatherStatus) {
-    case "Snow":
-      statusIcon.src = `https://www.svgrepo.com/show/252488/snowy-snow.svg`;
-      break;
-    case "Clouds":
-      statusIcon.src = `https://www.svgrepo.com/show/68769/weather.svg`;
-      break;
-
-    default:
-      statusIcon.src = `https://www.svgrepo.com/show/315013/weather.svg`;
+  try {
+    const DATA = await res.json();
+    manipulateUI(DATA);
+  } catch (e) {
+    console.log(e);
   }
-  // show the icon
-  statusIcon.hidden = false;
-
-  // update the ui with the aquired data
-  city.textContent = data.city;
-  temp.textContent = data.temp;
-  date.textContent = data.date;
-  content.textContent =
-    data.userResponse || "Nothing Felt!";
-
-  //   fetch data from server on /get route!
-  //   const res = await fetch("/get");
-
-  //   try {
-  //     const DATA = await res.json();
-  //     console.log(DATA);
-  //     return DATA;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
 };
 
 // function which call all the chaining promises!!
@@ -106,7 +105,7 @@ const executer = () => {
   const feelings =
     document.getElementById("feelings").value;
 
-  fetchWeather(zipCode).then((resolve) => {
+  fetchWeather(apiKey, zipCode).then((resolve) => {
     if (resolve.cod === 200) {
       postData(`/add`, {
         city: resolve.name,
@@ -114,7 +113,7 @@ const executer = () => {
         date: newDate,
         weatherStatus: resolve.weather[0].main,
         userResponse: feelings,
-      }).then((resolve) => dynUpdateUI(resolve));
+      }).then(dynUpdateUI());
     } else {
       // [ ] city found found on cod:404
       console.log(resolve.message);
