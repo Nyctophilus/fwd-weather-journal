@@ -49,3 +49,7 @@ app.post("/add", (req, res) => {
   console.log(`Posting on server`);
   console.log(projectData);
 });
+
+app.get("/all", (req, res) =>
+  res.status(200).send(projectData)
+);
