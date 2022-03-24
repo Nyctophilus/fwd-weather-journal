@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 // Cors for cross origin allowance
 const cors = require("cors");
+const res = require("express/lib/response");
 
 app.use(cors());
 
@@ -37,7 +38,8 @@ app.get("/get", (req, res) =>
 // post route on '/add'
 app.post("/add", (req, res) => {
   projectData = {
-    temperature: req.body.temperature,
+    city: req.body.city,
+    temp: req.body.temp,
     date: req.body.date,
     userResponse: req.body.userResponse,
   };
