@@ -42,6 +42,7 @@ app.post("/add", (req, res) => {
     temp: req.body.temp,
     date: req.body.date,
     userResponse: req.body.userResponse,
+    weatherStatus: req.body.weatherStatus,
   };
   res.send(projectData);
 

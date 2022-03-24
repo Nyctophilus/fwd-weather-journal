@@ -6,12 +6,33 @@ Udacity-FWD Project
 
 ## Overview
 
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI.
+Weather Journal App with Asynchronous JavaScript that uses Web API and user data to dynamically update the UI.
 
-## Instructions
+## Table of Contents
 
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+- [Features](#Features)
+- [Contact](#Contact)
 
-## Extras
+### Preview Image
 
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+![Banner Image](preview.webp)
+
+#### Features
+
+<menu>
+  <li>Asynchronous JavaScript</li>
+  <li>Express.js Environment</li>
+  <li>Server-Side Code & Client-Side Code</li>
+  <li>fetch data from API, which used to dynamically update the UI.</li>
+</menu>
+
+<br>
+<br>
+<br>
+🤩 Leave a :star:&nbsp;if you like it, Please!
+
+<br>
+
+#### Contact
+
+📫 Please hit me up at mohammed.yuossry@gmail.com if you have any feedback or improvements.
