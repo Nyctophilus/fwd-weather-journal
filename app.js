@@ -1,8 +1,16 @@
 /* Global Variables */
-const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
-let apiKey = `,&appid=78e5b891e6da809c0b2db304f0ca8cd1`;
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`,
+  apiKey = `,&appid=78e5b891e6da809c0b2db304f0ca8cd1`;
 
 // ,apiKey = `,&appid=${process.env.APIKEY}`
+
+// 	entry holders
+const temp = document.getElementById("temp"),
+  date = document.getElementById("date"),
+  city = document.getElementById("city"),
+  statusIcon = document.getElementById("statusIcon"),
+  error = document.getElementById("error"),
+  feeling = document.getElementById("feeling");
 
 /*  get key from the server
 
@@ -29,13 +37,6 @@ let newDate = `${d.getDate()}-${d.toLocaleString("en-us", {
 	helper functions
 */
 function manipulateUI(data) {
-  // 	entry holders
-  const temp = document.getElementById("temp"),
-    date = document.getElementById("date"),
-    city = document.getElementById("city"),
-    statusIcon = document.getElementById("statusIcon"),
-    feeling = document.getElementById("feeling");
-
   // chnage source img based on the weather status aquired!
   switch (data.weatherStatus) {
     case "Snow":
@@ -53,11 +54,26 @@ function manipulateUI(data) {
 
   // update the ui with the aquired data
   city.innerHTML = `City Name: <strong>${data.city}</strong>`;
-  temp.innerHTML = `Temperature: <strong>${data.temp}</strong>`;
+  temp.innerHTML = `<strong>${data.temp}</strong>`;
   date.innerHTML = `Date: <strong>${data.date}</strong>`;
-  feeling.innerHTML = `Your Feedback: <strong>${
+  feeling.innerHTML = `Your Feedback: <q><strong>${
     data.userResponse || "Nothing Felt!"
-  }</strong>`;
+  }</strong></q>`;
+  error.innerHTML = ``; //   clear error div
+}
+
+function errorNotFound(resolve) {
+  // [x] city found found on cod:404
+  error.innerHTML = `Aw, ${
+    resolve.message || "Not Found!"
+  } 😰`;
+
+  (city.innerHTML =
+    temp.innerHTML =
+    date.innerHTML =
+    feeling.innerHTML =
+      ``),
+    (statusIcon.hidden = true);
 }
 
 /*
@@ -76,6 +92,7 @@ const fetchWeather = async (key, zipCode) => {
 
     return data;
   } catch (e) {
+    errorNotFound();
     console.log(e);
   }
 };
@@ -137,10 +154,7 @@ const executer = () => {
         userResponse: feelings,
       }).then(dynUpdateUI());
     } else {
-      // [x] city found found on cod:404
-      document.getElementById(
-        "error"
-      ).innerHTML = `Aw, ${resolve.message} 😰`;
+      errorNotFound(resolve);
     }
   });
 };
