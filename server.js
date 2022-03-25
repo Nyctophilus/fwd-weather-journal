@@ -6,7 +6,7 @@ const express = require("express");
 
 // Start up an instance of app
 const app = express();
-app.use(express.json());
+// app.use(express.json());  // do the same as Middleware as app.use(bodyParser.json());
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
