@@ -28,7 +28,7 @@
 		  <textarea
 			class="myInput"
 			id="feelings"
-			placeholder="Enter your feelings here" 
+			placeholder="type your feelings here" 
 		  ></textarea></div>
       </div>
       <div class="gen">
@@ -40,13 +40,17 @@
       <div class="holder entry">
         <div class="title">Most Recent Entry</div>
         <div id="entryHolder">
-          <div id="city"></div>
-          <div id="date"></div>
-          <div id="temp"></div>
-          <img  id="statusIcon" alt="Weather Status" hidden></img>
-          <div id="feeling"></div>
-		  <div id="error"></div>
+          <div class="left">
+			<div id="city"></div>
+			<div id="date"></div>
+			<div id="feeling"></div>
+		  </div>
+          <div class="right">
+			<div id="temp"></div>
+			<img  id="statusIcon" alt="Weather Status" hidden></img>
+		  </div>
         </div>
+		<div id="error"></div>
       </div>
     </div>
     <script src="app.js" type="text/javascript"></script>
