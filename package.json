@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "express": "^4.17.3",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "pug": "^3.0.2"
+  },
+  "scripts": {
+    "start": "nodemon -e js,pug,ejs server.js"
+  },
+  "name": "professional-nanodegree",
+  "version": "1.0.0",
+  "main": "CallStack-EventLoop.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Udacity-FWD Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nyctophilus/fwd-weather-journal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nyctophilus/fwd-weather-journal/issues"
+  },
+  "homepage": "https://github.com/Nyctophilus/fwd-weather-journal#readme"
+}
