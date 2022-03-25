@@ -136,12 +136,48 @@ button:focus {
 }
 
 .entry {
-  padding-block: 1rem;
   background-color: rgba(59, 74, 107, 0.4);
+  height: fit-content;
 }
+
 .entry .title {
   text-align: center;
   font-size: 1.5em;
   font-style: italic;
   margin-bottom: var(--pad);
+}
+
+.entry #entryHolder {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+#temp,
+#city,
+#date {
+  margin-bottom: 0.6rem;
+}
+.entry #statusIcon {
+  max-width: 50px;
+  margin-inline: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#temp {
+  text-align: center;
+}
+
+#temp strong {
+  margin-inline: auto;
+}
+
+#feeling q {
+  font-style: italic;
+}
+
+#error {
+  text-align: center;
 }
